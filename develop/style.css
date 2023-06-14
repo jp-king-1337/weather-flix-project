@@ -3,11 +3,11 @@
     padding: 0;
 }
 
-/* .container {
-    height: 100vh;
-    width: 100%;
-} */
-
 .display-none {
     display: none;
+}
+
+.btn-large{
+    margin-top: 30px;
+    border-radius: 15px;
 }
