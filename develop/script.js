@@ -3,6 +3,11 @@ movieKey = "7355d3ba";
 
 $(document).ready(function () {
   $(".sidenav").sidenav();
+
+  $("#enter-home-btn").click(function () {
+    $(".initial-container").addClass("display-none");
+    $("#home").removeClass("display-none");
+  });
 });
 
 
