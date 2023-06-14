@@ -1,13 +1,11 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
 .display-none {
     display: none;
 }
 
 .btn-large{
     margin-top: 30px;
+}
+
+.rounded-corners {
     border-radius: 15px;
 }
