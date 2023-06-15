@@ -40,48 +40,36 @@ function showPosition(position) {
         return response.json()
     }).then(function (res) {
         console.log(res)
-    })
+        var weatherCode = res.weather[0].id; // Get the weather condition code
+
+        // Set the image source based on the weather condition code
+        var imageSrc = getImageSource(weatherCode);
+
+        // Update the image source
+        $("#weather-image").attr("src", imageSrc);
+    });
 }
+
+// Function to get the image source based on the weather condition code
+function getImageSource(weatherCode) {
+    // Define the mapping of weather condition codes to image sources
+    var weatherImages = {
+        // Add more weather conditions and their corresponding image URLs
+        200: "./assets/weather-icons/lightning-icon.png",
+        300: "./assets/weather-icons/rain-icon.png",
+        500: "./assets/weather-icons/rain-icon.png",
+        800: "./assets/weather-icons/sunny-icon.png"
+    };
+
+    // Get the image source based on the weather code
+    var imageSrc = weatherImages[weatherCode];
+
+    // If the weather code is not found in the mapping, use a default image
+    if (!imageSrc) {
+        imageSrc = "./assets/weather-icons/cloudy-icon.png";
+    }
+
+    return imageSrc;
+}
+
 getLocation();
-
-
-$.ajax({
-    url: url,
-    method: "GET",
-    dataType: "json",
-    success: function (data) {
-        console.log("Weather data:", data);
-
-        // Extract the relevant weather information from the data
-        var weatherDescription = data.weather[0].description;
-        var temperature = data.main.temp;
-        var humidity = data.main.humidity;
-
-        // Display the weather information in the browser
-        $("#weather-description").text("Description: " + weatherDescription);
-        $("#temperature").text("Temperature: " + temperature + " K");
-        $("#humidity").text("Humidity: " + humidity + "%");
-
-        // This is what the logic will look like to display weather icons based on weather
-        if (weatherDescription.includes("cloudy")) {
-            var imageURL = './assets/cloudy-icon.png';
-            $("#myImage").attr("src", imageURL);
-        } if (weatherDescription.includes("raining")) {
-            var imageURL = './assets/rain-icon.png';
-            $("#myImage").attr("src", imageURL);
-        } if (weatherDescription.includes("lightning")) {
-            var imageURL = './assets/lightning-icon.png';
-            $("#myImage").attr("src", imageURL);
-        } if (weatherDescription.includes("snow")) {
-            var imageURL = './assets/snowing-icon.png';
-            $("#myImage").attr("src", imageURL);
-        } if (weatherDescription.includes("sun")) {
-            var imageURL = './assets/sunny-icon.png';
-            $("#myImage").attr("src", imageURL);
-        };
-
-    },
-    error: function (error) {
-        console.log("Error:", error);
-    },
-});
