@@ -36,3 +36,9 @@
 #home {
     animation: fadeIn 1s ease-in;
 }
+
+@media (min-width: 994px) {
+    .brand-logo {
+      margin-left: 30px;
+    }
+  }
