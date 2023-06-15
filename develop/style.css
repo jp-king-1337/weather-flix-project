@@ -31,6 +31,10 @@
     background-color: aquamarine;
 }
 
+.horizontal-display {
+    font-weight: bold;
+}
+
 /* NAV LINK PADDING */
 .custom-nav-link {
     margin-right: 40px;

@@ -16,13 +16,18 @@ $(document).ready(function () {
 
 // var x = document.getElementById("demo");
 function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    $("#weather-container").innerHTML =
-      "Geolocation is not supported by this browser.";
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, handleLocationError);
+    } else {
+      handleLocationError("Geolocation is not supported by this browser.");
+    }
   }
-}
+  
+  function handleLocationError(error) {
+    $("#weather-description").text("Error retrieving weather - enjoy random movies!");
+    $("#weather-image").hide();
+    console.log("Geolocation error:", error);
+  }
 
 function getImageSource(weatherCode) {
   var weatherImages = {
