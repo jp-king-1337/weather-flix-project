@@ -18,6 +18,19 @@
     /* height: 94vh; */
 }
 
+#weather-container {
+    border: 3px;
+    /* background-color: antiquewhite; */
+}
+
+#weather-image {
+    width: 110px;
+}
+
+.movie-section {
+    background-color: aquamarine;
+}
+
 /* NAV LINK PADDING */
 .custom-nav-link {
     margin-right: 40px;
@@ -42,3 +55,10 @@
       margin-left: 30px;
     }
   }
+
+@media (max-width: 600px) {
+    .horizontal-display {
+        display: flex;
+        justify-content: space-around;
+    }
+}
