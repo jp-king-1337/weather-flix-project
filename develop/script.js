@@ -43,7 +43,29 @@ getCurrentPosition()
     console.log("API URL:", url);
 
     // Perform further actions with the URL, such as making an API request
+    $.ajax({
+      url: url,
+      method: "GET",
+      dataType: "json",
+      success: function (data) {
+        console.log("Weather data:", data);
+
+        // Extract the relevant weather information from the data
+        var weatherDescription = data.weather[0].description;
+        var temperature = data.main.temp;
+        var humidity = data.main.humidity;
+
+        // Display the weather information in the browser
+        $("#weather-description").text("Description: " + weatherDescription);
+        $("#temperature").text("Temperature: " + temperature + " K");
+        $("#humidity").text("Humidity: " + humidity + "%");
+
+      },
+      error: function (error) {
+        console.log("Error:", error);
+      },
+    });
   })
-  .catch(function (error) {
-    console.log("Error:", error);
-  });
+  .catch (function (error) {
+  console.log("Error:", error);
+});
