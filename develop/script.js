@@ -1,6 +1,13 @@
 // have fun with coding this:)
 movieKey = "7355d3ba";
 
+var movieNameRef =  $('movie-name');
+var searchBTn = $('search-btn');
+var result = $('result');
+
+
+
+
 $(document).ready(function () {
   $(".sidenav").sidenav();
 
@@ -14,23 +21,14 @@ $(document).ready(function () {
 
 
 
-var baseURL =
-  "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={weatherKey}";
+var baseURL = "https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={lon}&appid={weatherKey}";
 var weatherKey = "96515e32da8200e2651c60008ed403ea";
-var url = baseURL.replace("{weatherKey}", weatherKey);
-var latitude = position.coords.latitude;
-var longitude = position.coords.longitude;
-console.log(url);
+var url = baseURL;
+baseURL.replace('{weatherKey}', weatherKey);
+baseURL.replace('{latitude}', latitude);
+baseURL.replace('{longitude}', longitude);
 
-function getCurrentPosition() {
-  return new Promise(function (resolve, reject) {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(resolve, reject);
-    } else {
-      reject("Geolocation is not supported by this browser.");
-    }
-  });
-}
+
 
 getCurrentPosition()
   .then(function (position) {
@@ -38,7 +36,11 @@ getCurrentPosition()
     var longitude = position.coords.longitude;
 
     var weatherKey = "96515e32da8200e2651c60008ed403ea";
-    var url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${weatherKey}`;
+    var baseURL = "https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={weatherKey}";
+    var url = baseURL
+      .replace("{latitude}", latitude)
+      .replace("{longitude}", longitude)
+      .replace("{weatherKey}", weatherKey);
 
     console.log("API URL:", url);
 
