@@ -1,4 +1,3 @@
-
 movieKey = "7355d3ba";
 
 var movieNameRef = $("#movie-name");
@@ -116,57 +115,25 @@ function suggestMovies(weatherCode) {
     }
 
     var apiUrl = `https://www.omdbapi.com/?apikey=${movieKey}&s=${encodeURIComponent(
-        movieKeywords.join('|')
+        movieKeywords[Math.floor(Math.random() * movieKeywords.length)]
     )}&type=movie`;
+
+    console.log(apiUrl);
 
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            console.log(data); // Log the API response for debugging
+            console.log(data);
 
             if (data.Response === "True") {
                 var movies = data.Search;
                 var result = $('#result');
                 result.html('');
 
-                if (movies && movies.length > 0) {
-                    // Filter movies based on the genre
-                    var genreMovies = movies.filter(movie => {
-                        var genres = movie.Genre.split(", ");
-                        return movieKeywords.some(keyword => genres.includes(keyword));
-                    });
 
-                    if (genreMovies.length > 0) {
-                        // Shuffle the movies array
-                        shuffleArray(genreMovies);
-                        // Display up to six movies
-                        for (var i = 0; i < Math.min(6, genreMovies.length); i++) {
-                            var movie = genreMovies[i];
-                            var movieTitle = movie.Title;
-                            var movieYear = movie.Year;
-                            var moviePoster = movie.Poster;
-
-                            // Create movie elements
-                            var movieElement = $('<div>').addClass('movie');
-                            var posterElement = $('<img>').attr('src', moviePoster).addClass('poster');
-                            var titleElement = $('<h6>').text(movieTitle).addClass('title');
-                            var yearElement = $('<span>').text(movieYear).addClass('year');
-
-                            // Append movie elements to the result container
-                            movieElement.append(posterElement, titleElement, yearElement);
-                            result.append(movieElement);
-                        }
-                    } else {
-                        result.append('No movies found for the specified genre.');
-                    }
-                } else {
-                    result.append('No movies found for the specified genre.');
-                }
-            } else {
-                console.log("Error: ", data.Error);
             }
         })
-        .catch(error => {
-            console.log("Error fetching movie data:", error);
-        });
+        .catch (error => {
+    console.log("Error fetching movie data:", error);
+});
 };
