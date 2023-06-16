@@ -139,8 +139,13 @@ function suggestMovies(weatherCode) {
                     var html = `
                         <h3>${title} (${year})</h3>
                         <img src="${poster}" alt="${title} Poster">
+                        <button id="randomMovieBtn">Generate Random Movie</button>
                     `;
                     result.html(html);
+
+                    $('#randomMovieBtn').on('click', function () {
+                        suggestMovies(weatherCode);
+                    });
                 }
             }
         })
