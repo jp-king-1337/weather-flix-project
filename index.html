@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+
 <!-- HEAD -->
 <head>
     <meta charset="UTF-8" />
@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- MAIN HOME SCREEN -->
     <main id="home" class="display-none" style="height: 100vh">
         <!-- NAVBAR -->
@@ -36,15 +36,15 @@
                 <a href="#!" class="brand-logo">Weather Flix</a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down m-r2">
-                    <li><a href="" class="custom-nav-link">Favourite Movies</a></li>
-                    <li><a href="" class="custom-nav-link">Weather</a></li>
+                    <li><a href="#" id="favoriteMoviesLink" class="custom-nav-link">Favorite Movies</a></li>
+                    <li><a href="#" class="custom-nav-link">Weather</a></li>
                 </ul>
             </div>
         </nav>
 
         <ul class="sidenav" id="mobile-demo">
-            <li><a href="">Favourite Movies</a></li>
-            <li><a href="">Weather</a></li>
+            <li><a href="#">Favorite Movies</a></li>
+            <li><a href="#">Weather</a></li>
         </ul>
 
         <!-- WEATHER & MOVIE CONTENT -->
@@ -72,6 +72,7 @@
                         <div class="movie-container">
                             <h3 id="movieTitle"></h3>
                             <img id="posterImage" src="" alt="Movie Poster">
+                            <button id="favoritesBtn" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">Favorite</i></button>
                             <button id="randomMovieBtn">Generate Random Movie</button>
                         </div>
                     </div>

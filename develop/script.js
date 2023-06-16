@@ -13,6 +13,38 @@ $(document).ready(function () {
     });
 });
 
+$("#result").on("click", "#favoritesBtn", function () {
+    var movieTitle = $("#movieTitle").text();
+    var favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
+
+    if (!favoriteMovies.includes(movieTitle)) {
+        favoriteMovies.push(movieTitle);
+        localStorage.setItem("favoriteMovies", JSON.stringify(favoriteMovies));
+        alert("Movie added to favorites!");
+    } else {
+        alert("This movie is already in your favorites!");
+    }
+});
+
+$("#favoriteMoviesLink").click(function () {
+    var favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
+
+    if (favoriteMovies.length > 0) {
+        var html = "<h3>Your Favorite Movies:</h3>";
+        html += "<ul>";
+
+        favoriteMovies.forEach(function (movie) {
+            html += "<li>" + movie + "</li>";
+        });
+
+        html += "</ul>";
+
+        $("#result").html(html);
+    } else {
+        $("#result").html("<h3>No favorite movies found!</h3>");
+    }
+});
+
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, handleLocationError);
@@ -142,6 +174,13 @@ function suggestMovies(weatherCode) {
                         <button id="randomMovieBtn">Generate Random Movie</button>
                     `;
                     result.html(html);
+
+                    var favoritesButton = $("<button>")
+                        .attr("id", "favoritesBtn")
+                        .addClass("btn-floating btn-large waves-effect waves-light red")
+                        .html('<i class="material-icons">favorite</i>');
+
+                    result.append(favoritesButton);
 
                     $('#randomMovieBtn').on('click', function () {
                         suggestMovies(weatherCode);
