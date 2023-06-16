@@ -1,6 +1,7 @@
 # weather-flix-project
 
 ## Description
+This app will generate a random movie for you to watch based on the weather in your area.
 
 
 ## Table of Contents
@@ -12,10 +13,14 @@
 
 
 ## Installation
-
+You can clone the repo from github by using this in your command line:
+git clone git@github.com:ThomasSzentirmay/weather-flix-project.git
 
 
 ## Usage
+To use the Weather Flix web app:
+
+### Features
 
 
 
