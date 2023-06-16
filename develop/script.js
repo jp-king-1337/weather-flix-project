@@ -124,8 +124,13 @@ function suggestMovies(weatherCode) {
         movieGenre = "comedy";
     }
 
-    var movieTitle = movieGenre;
 
+
+
+
+
+    
+    var movieTitle = movieGenre;
     var apiUrl = `https://www.omdbapi.com/?apikey=${movieKey}&t=${encodeURIComponent(movieTitle)}&genre=${encodeURIComponent(movieGenre)}`;
 
     fetch(apiUrl)
@@ -134,16 +139,13 @@ function suggestMovies(weatherCode) {
             // Handle the movie data
             console.log(data);
             // Display the movie suggestions on the page
-            result.innerHTML = "Movie Suggestions:<br>";
-            data.Search.forEach(movie => {
-                result.innerHTML += movie.Title + "<br>";
+            var movieTitle = data.Title
+            var result = $('#movie-name');
+            result.html('');
+            result.append(movieTitle)
             });
-        })
-        .catch(error => {
-            // Handle any errors that occur during the API request
-            console.error("Error:", error);
-        });
         
+
 }
 var weatherCode = 800;
 suggestMovies(weatherCode);
