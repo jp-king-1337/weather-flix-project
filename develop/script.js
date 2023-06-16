@@ -1,11 +1,9 @@
-// have fun with coding this:)
+
 movieKey = "7355d3ba";
 
-var movieNameRef = $("movie-name");
-var searchBTn = $("search-btn");
-var result = $("result");
-
-
+var movieNameRef = $("#movie-name");
+var searchBTn = $("#search-btn");
+var result = $("#result");
 
 $(document).ready(function () {
     $(".sidenav").sidenav();
@@ -16,7 +14,6 @@ $(document).ready(function () {
     });
 });
 
-// var x = document.getElementById("demo");
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, handleLocationError);
@@ -68,9 +65,7 @@ function showPosition(position) {
 
             $("#weather-image").attr("src", imageSrc);
             $("#weather-description").text(res.weather[0].main);
-            $("#temperature").text(
-                "Temperature: " + Math.round(res.main.temp) + "°F"
-            );
+            $("#temperature").text("Temperature: " + Math.round(res.main.temp) + "°F");
             $("#humidity").text("Humidity: " + res.main.humidity + "%");
 
             if (weatherCode >= 200 && weatherCode <= 232) {
@@ -79,15 +74,9 @@ function showPosition(position) {
                     "develop/assets/weather-icons/lightning-icon.png"
                 );
             } else if (weatherCode >= 500 && weatherCode <= 599) {
-                $("#weather-image").attr(
-                    "src",
-                    "develop/assets/weather-icons/rain-icon.png"
-                );
+                $("#weather-image").attr("src", "develop/assets/weather-icons/rain-icon.png");
             } else if (weatherCode === 800) {
-                $("#weather-image").attr(
-                    "src",
-                    "develop/assets/weather-icons/sunny-icon.png"
-                );
+                $("#weather-image").attr("src", "develop/assets/weather-icons/sunny-icon.png");
             } else if (weatherCode >= 600 && weatherCode <= 622) {
                 $("#weather-image").attr(
                     "src",
@@ -99,53 +88,85 @@ function showPosition(position) {
                     "develop/assets/weather-icons/cloudy-icon.png"
                 );
             }
+
+            // Call the function to suggest movies based on the weather code
+            suggestMovies(weatherCode);
         });
 }
 
 getLocation();
 
 function suggestMovies(weatherCode) {
-    // var weatherCode = res.weather[0].id;
-    var movieGenre;
+    var movieKeywords;
     if (weatherCode >= 200 && weatherCode <= 232) {
         // Thunderstorms
-        movieGenre = "horror";
+        movieKeywords = horrorMovies;
     } else if (weatherCode >= 500 && weatherCode <= 599) {
         // Rain
-        movieGenre = "drama";
+        movieKeywords = dramaMovies;
     } else if (weatherCode === 800) {
         // Clear sky
-        movieGenre = "adventure";
+        movieKeywords = adventureMovies;
     } else if (weatherCode >= 600 && weatherCode <= 622) {
         // Snow
-        movieGenre = "fantasy";
+        movieKeywords = fantasyMovies;
     } else {
         // Other weather conditions
-        movieGenre = "comedy";
+        movieKeywords = comedyMovies;
     }
 
-
-
-
-
-
-    
-    var movieTitle = movieGenre;
-    var apiUrl = `https://www.omdbapi.com/?apikey=${movieKey}&t=${encodeURIComponent(movieTitle)}&genre=${encodeURIComponent(movieGenre)}`;
+    var apiUrl = `https://www.omdbapi.com/?apikey=${movieKey}&s=${encodeURIComponent(
+        movieKeywords.join('|')
+    )}&type=movie`;
 
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            // Handle the movie data
-            console.log(data);
-            // Display the movie suggestions on the page
-            var movieTitle = data.Title
-            var result = $('#movie-name');
-            result.html('');
-            result.append(movieTitle)
-            });
-        
+            console.log(data); // Log the API response for debugging
 
-}
-var weatherCode = 800;
-suggestMovies(weatherCode);
+            if (data.Response === "True") {
+                var movies = data.Search;
+                var result = $('#result');
+                result.html('');
+
+                if (movies && movies.length > 0) {
+                    // Filter movies based on the genre
+                    var genreMovies = movies.filter(movie => {
+                        var genres = movie.Genre.split(", ");
+                        return movieKeywords.some(keyword => genres.includes(keyword));
+                    });
+
+                    if (genreMovies.length > 0) {
+                        // Shuffle the movies array
+                        shuffleArray(genreMovies);
+                        // Display up to six movies
+                        for (var i = 0; i < Math.min(6, genreMovies.length); i++) {
+                            var movie = genreMovies[i];
+                            var movieTitle = movie.Title;
+                            var movieYear = movie.Year;
+                            var moviePoster = movie.Poster;
+
+                            // Create movie elements
+                            var movieElement = $('<div>').addClass('movie');
+                            var posterElement = $('<img>').attr('src', moviePoster).addClass('poster');
+                            var titleElement = $('<h6>').text(movieTitle).addClass('title');
+                            var yearElement = $('<span>').text(movieYear).addClass('year');
+
+                            // Append movie elements to the result container
+                            movieElement.append(posterElement, titleElement, yearElement);
+                            result.append(movieElement);
+                        }
+                    } else {
+                        result.append('No movies found for the specified genre.');
+                    }
+                } else {
+                    result.append('No movies found for the specified genre.');
+                }
+            } else {
+                console.log("Error: ", data.Error);
+            }
+        })
+        .catch(error => {
+            console.log("Error fetching movie data:", error);
+        });
+};
