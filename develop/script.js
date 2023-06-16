@@ -96,66 +96,75 @@ function showPosition(position) {
 getLocation();
 
 function suggestMovies(weatherCode) {
-    var movieGenre;
+    var movieKeywords;
     if (weatherCode >= 200 && weatherCode <= 232) {
         // Thunderstorms
-        movieGenre = "27"; // Genre ID for Horror
+        movieKeywords = horrorMovies;
     } else if (weatherCode >= 500 && weatherCode <= 599) {
         // Rain
-        movieGenre = "18"; // Genre ID for Drama
+        movieKeywords = dramaMovies;
     } else if (weatherCode === 800) {
         // Clear sky
-        movieGenre = "12"; // Genre ID for Adventure
+        movieKeywords = adventureMovies;
     } else if (weatherCode >= 600 && weatherCode <= 622) {
         // Snow
-        movieGenre = "14"; // Genre ID for Fantasy
+        movieKeywords = fantasyMovies;
     } else {
         // Other weather conditions
-        movieGenre = "35"; // Genre ID for Comedy
+        movieKeywords = comedyMovies;
     }
 
-    var apiUrl = `https://www.omdbapi.com/?apikey=${movieKey}&s=&type=movie&genre=${movieGenre}`;
+    var apiUrl = `https://www.omdbapi.com/?apikey=${movieKey}&s=${encodeURIComponent(
+        movieKeywords.join('|')
+    )}&type=movie`;
 
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            // Handle the movie data
-            console.log(data);
-            // Display the movie suggestions on the page
-            var movies = data.Search;
-            var result = $('#result');
-            result.html('');
-            if (movies && movies.length > 0) {
-                // Shuffle the movies array
-                shuffleArray(movies);
-                // Display up to six movies
-                for (var i = 0; i < Math.min(6, movies.length); i++) {
-                    var movie = movies[i];
-                    var movieTitle = movie.Title;
-                    var movieYear = movie.Year;
-                    var moviePoster = movie.Poster;
+    $.getJSON(apiUrl)
+        .done(function (data) {
+            console.log(data); // Log the API response for debugging
 
-                    // Create movie elements
-                    var movieElement = $('<div>').addClass('movie');
-                    var posterElement = $('<img>').attr('src', moviePoster).addClass('poster');
-                    var titleElement = $('<h6>').text(movieTitle).addClass('title');
-                    var yearElement = $('<span>').text(movieYear).addClass('year');
+            if (data.Response === "True") {
+                var movies = data.Search;
+                var result = $('#result');
+                result.html('');
 
-                    // Append movie elements to the result container
-                    movieElement.append(posterElement, titleElement, yearElement);
-                    result.append(movieElement);
+                if (movies && movies.length > 0) {
+                    // Filter movies based on the genre
+                    var genreMovies = movies.filter(movie => {
+                        var genres = movie.Genre.split(", ");
+                        return movieKeywords.some(keyword => genres.includes(keyword));
+                    });
+
+                    if (genreMovies.length > 0) {
+                        // Shuffle the movies array
+                        shuffleArray(genreMovies);
+                        // Display up to six movies
+                        for (var i = 0; i < Math.min(6, genreMovies.length); i++) {
+                            var movie = genreMovies[i];
+                            var movieTitle = movie.Title;
+                            var movieYear = movie.Year;
+                            var moviePoster = movie.Poster;
+
+                            // Create movie elements
+                            var movieElement = $('<div>').addClass('movie');
+                            var posterElement = $('<img>').attr('src', moviePoster).addClass('poster');
+                            var titleElement = $('<h6>').text(movieTitle).addClass('title');
+                            var yearElement = $('<span>').text(movieYear).addClass('year');
+
+                            // Append movie elements to the result container
+                            movieElement.append(posterElement, titleElement, yearElement);
+                            result.append(movieElement);
+                        }
+                    } else {
+                        result.append('No movies found for the specified genre.');
+                    }
+                } else {
+                    result.append('No movies found for the specified genre.');
                 }
             } else {
-                result.html('No movies found for the specified genre.');
+                console.log("Error: ", data.Error);
             }
+        })
+        .fail(function (error) {
+            console.log("Error fetching movie data:", error);
         });
-
-    // Function to shuffle an array
-    function shuffleArray(array) {
-        for (var i = array.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            var temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
-        }
-    }};
+};
