@@ -1,11 +1,8 @@
-// have fun with coding this:)
 movieKey = "7355d3ba";
 
 var movieNameRef = $("movie-name");
 var searchBTn = $("search-btn");
 var result = $("result");
-
-
 
 $(document).ready(function () {
     $(".sidenav").sidenav();
@@ -16,7 +13,6 @@ $(document).ready(function () {
     });
 });
 
-// var x = document.getElementById("demo");
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, handleLocationError);
@@ -68,9 +64,7 @@ function showPosition(position) {
 
             $("#weather-image").attr("src", imageSrc);
             $("#weather-description").text(res.weather[0].main);
-            $("#temperature").text(
-                "Temperature: " + Math.round(res.main.temp) + "°F"
-            );
+            $("#temperature").text("Temperature: " + Math.round(res.main.temp) + "°F");
             $("#humidity").text("Humidity: " + res.main.humidity + "%");
 
             if (weatherCode >= 200 && weatherCode <= 232) {
@@ -79,15 +73,9 @@ function showPosition(position) {
                     "develop/assets/weather-icons/lightning-icon.png"
                 );
             } else if (weatherCode >= 500 && weatherCode <= 599) {
-                $("#weather-image").attr(
-                    "src",
-                    "develop/assets/weather-icons/rain-icon.png"
-                );
+                $("#weather-image").attr("src", "develop/assets/weather-icons/rain-icon.png");
             } else if (weatherCode === 800) {
-                $("#weather-image").attr(
-                    "src",
-                    "develop/assets/weather-icons/sunny-icon.png"
-                );
+                $("#weather-image").attr("src", "develop/assets/weather-icons/sunny-icon.png");
             } else if (weatherCode >= 600 && weatherCode <= 622) {
                 $("#weather-image").attr(
                     "src",
@@ -99,39 +87,34 @@ function showPosition(position) {
                     "develop/assets/weather-icons/cloudy-icon.png"
                 );
             }
+
+            // Call the function to suggest movies based on the weather code
+            suggestMovies(weatherCode);
         });
 }
 
 getLocation();
 
 function suggestMovies(weatherCode) {
-    // var weatherCode = res.weather[0].id;
     var movieGenre;
     if (weatherCode >= 200 && weatherCode <= 232) {
         // Thunderstorms
-        movieGenre = "horror";
+        movieGenre = "27"; // Genre ID for Horror
     } else if (weatherCode >= 500 && weatherCode <= 599) {
         // Rain
-        movieGenre = "drama";
+        movieGenre = "18"; // Genre ID for Drama
     } else if (weatherCode === 800) {
         // Clear sky
-        movieGenre = "adventure";
+        movieGenre = "12"; // Genre ID for Adventure
     } else if (weatherCode >= 600 && weatherCode <= 622) {
         // Snow
-        movieGenre = "fantasy";
+        movieGenre = "14"; // Genre ID for Fantasy
     } else {
         // Other weather conditions
-        movieGenre = "comedy";
+        movieGenre = "35"; // Genre ID for Comedy
     }
 
-
-
-
-
-
-    
-    var movieTitle = movieGenre;
-    var apiUrl = `https://www.omdbapi.com/?apikey=${movieKey}&t=${encodeURIComponent(movieTitle)}&genre=${encodeURIComponent(movieGenre)}`;
+    var apiUrl = `https://www.omdbapi.com/?apikey=${movieKey}&s=&type=movie&genre=${movieGenre}`;
 
     fetch(apiUrl)
         .then(response => response.json())
@@ -139,13 +122,41 @@ function suggestMovies(weatherCode) {
             // Handle the movie data
             console.log(data);
             // Display the movie suggestions on the page
-            var movieTitle = data.Title
-            var result = $('#movie-name');
+            var movies = data.Search;
+            var result = $('#result');
             result.html('');
-            result.append(movieTitle)
-            });
-        
+            if (movies && movies.length > 0) {
+                // Shuffle the movies array
+                shuffleArray(movies);
+                // Display up to six movies
+                for (var i = 0; i < Math.min(6, movies.length); i++) {
+                    var movie = movies[i];
+                    var movieTitle = movie.Title;
+                    var movieYear = movie.Year;
+                    var moviePoster = movie.Poster;
 
+                    // Create movie elements
+                    var movieElement = $('<div>').addClass('movie');
+                    var posterElement = $('<img>').attr('src', moviePoster).addClass('poster');
+                    var titleElement = $('<h6>').text(movieTitle).addClass('title');
+                    var yearElement = $('<span>').text(movieYear).addClass('year');
+
+                    // Append movie elements to the result container
+                    movieElement.append(posterElement, titleElement, yearElement);
+                    result.append(movieElement);
+                }
+            } else {
+                result.append('No movies found for the specified genre.');
+            }
+        });
 }
-var weatherCode = 800;
-suggestMovies(weatherCode);
+
+// Function to shuffle an array
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
