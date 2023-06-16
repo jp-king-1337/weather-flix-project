@@ -130,10 +130,21 @@ function suggestMovies(weatherCode) {
                 var result = $('#result');
                 result.html('');
 
+                if (movies.length > 0) {
+                    var firstMovie = movies[0];
+                    var title = firstMovie.Title;
+                    var year = firstMovie.Year;
+                    var poster = firstMovie.Poster;
 
+                    var html = `
+                        <h3>${title} (${year})</h3>
+                        <img src="${poster}" alt="${title} Poster">
+                    `;
+                    result.html(html);
+                }
             }
         })
-        .catch (error => {
-    console.log("Error fetching movie data:", error);
-});
-};
+        .catch(error => {
+            console.log("Error fetching movie data:", error);
+        });
+}
