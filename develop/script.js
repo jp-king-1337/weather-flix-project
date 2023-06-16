@@ -1,4 +1,4 @@
-movieKey = "7355d3ba";
+var movieKey = "7355d3ba";
 
 var movieNameRef = $("#movie-name");
 var searchBTn = $("#search-btn");
@@ -13,10 +13,11 @@ $(document).ready(function () {
     });
 });
 
-$("#result").on("click", "#favoritesBtn", function () {
-    var movieTitle = $("#movieTitle").text();
+$(document).on("click", "#favoritesBtn", function () {
+    var movieTitle = $(this).siblings("h3").text();
     var favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
 
+    // Check if movie is already in favorites
     if (!favoriteMovies.includes(movieTitle)) {
         favoriteMovies.push(movieTitle);
         localStorage.setItem("favoriteMovies", JSON.stringify(favoriteMovies));
