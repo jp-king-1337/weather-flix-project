@@ -37,14 +37,26 @@
 }
 
 #randomMovieBtn {
-    display: block;
-    margin: 0 auto;
-    margin-top: 25px;
-    border-radius: 10px;
-    padding: 8px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
+  display: block;
+  margin: 0 auto;
+  margin-top: 25px;
+  border-radius: 10px;
+  padding: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.favourite-movies-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.favourite-movie {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
 }
 
 /* NAV LINK PADDING */

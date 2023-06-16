@@ -11,6 +11,12 @@ $(document).ready(function () {
         $(".initial-container").addClass("display-none");
         $("#home").removeClass("display-none");
     });
+
+    $("#home-link").click(function (e) {
+        e.preventDefault(); // Prevent default link behavior
+        window.location.href = "index.html"; // Replace "index.html" with the filename or URL of your main home screen
+        window.location.reload(); // Refresh the browser window
+    });
 });
 
 $(document).on("click", "#favoritesBtn", function () {
@@ -27,15 +33,15 @@ $(document).on("click", "#favoritesBtn", function () {
     }
 });
 
-$("#favoriteMoviesLink").click(function () {
+$(document).on("click", "#favoriteMoviesLink", function () {
     var favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
 
     if (favoriteMovies.length > 0) {
         var html = "<h3>Your Favorite Movies:</h3>";
-        html += "<ul>";
+        html += "<ul class='favourite-movies-list'>";
 
         favoriteMovies.forEach(function (movie) {
-            html += "<li>" + movie + "</li>";
+            html += "<li class='favourite-movie'>" + movie + "</li>";
         });
 
         html += "</ul>";
@@ -44,6 +50,8 @@ $("#favoriteMoviesLink").click(function () {
     } else {
         $("#result").html("<h3>No favorite movies found!</h3>");
     }
+
+    $(".sidenav").sidenav("close");
 });
 
 function getLocation() {
