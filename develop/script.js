@@ -1,10 +1,9 @@
+$(document).ready(function () {
+    // Initialize the modal
+    $(".modal").modal();
+
 var movieKey = "7355d3ba";
 
-var movieNameRef = $("#movie-name");
-var searchBTn = $("#search-btn");
-var result = $("#result");
-
-$(document).ready(function () {
     $(".sidenav").sidenav();
 
     $("#enter-home-btn").click(function () {
@@ -18,13 +17,9 @@ $(document).ready(function () {
         window.location.reload(); // Refresh the browser window
     });
 
-    $(".modal").modal();
-});
-
 $(document).on("click", "#favoritesBtn", function () {
     var movieTitle = $(this).siblings("h3").text();
     var favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
-
     // Check if movie is already in favorites
     if (!favoriteMovies.includes(movieTitle)) {
         favoriteMovies.push(movieTitle);
@@ -206,4 +201,4 @@ function suggestMovies(weatherCode) {
         .catch(error => {
             console.log("Error fetching movie data:", error);
         });
-}
+}});
