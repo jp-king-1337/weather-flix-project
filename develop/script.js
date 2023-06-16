@@ -1,8 +1,8 @@
 movieKey = "7355d3ba";
 
-var movieNameRef = $("movie-name");
-var searchBTn = $("search-btn");
-var result = $("result");
+var movieNameRef = $("#movie-name");
+var searchBTn = $("#search-btn");
+var result = $("#result");
 
 $(document).ready(function () {
     $(".sidenav").sidenav();
@@ -146,17 +146,16 @@ function suggestMovies(weatherCode) {
                     result.append(movieElement);
                 }
             } else {
-                result.append('No movies found for the specified genre.');
+                result.html('No movies found for the specified genre.');
             }
         });
-}
 
-// Function to shuffle an array
-function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-}
+    // Function to shuffle an array
+    function shuffleArray(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }};
