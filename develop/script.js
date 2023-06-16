@@ -1,3 +1,4 @@
+
 movieKey = "7355d3ba";
 
 var movieNameRef = $("#movie-name");
@@ -118,8 +119,9 @@ function suggestMovies(weatherCode) {
         movieKeywords.join('|')
     )}&type=movie`;
 
-    $.getJSON(apiUrl)
-        .done(function (data) {
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
             console.log(data); // Log the API response for debugging
 
             if (data.Response === "True") {
@@ -164,7 +166,7 @@ function suggestMovies(weatherCode) {
                 console.log("Error: ", data.Error);
             }
         })
-        .fail(function (error) {
+        .catch(error => {
             console.log("Error fetching movie data:", error);
         });
 };
