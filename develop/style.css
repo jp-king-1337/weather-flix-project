@@ -4,6 +4,7 @@
 }
 
 /* CUSTOM CLASSES TO ASSIST FRAMEWORK */
+
 .btn-large {
   margin-top: 30px;
 }
@@ -28,7 +29,7 @@
 
 .movie-section {
   background-color: aquamarine;
-  height: 100vh;
+  height: 93vh;
 }
 
 .horizontal-display {
