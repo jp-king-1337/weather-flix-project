@@ -27,7 +27,7 @@ $(document).on("click", "#favoritesBtn", function () {
     }
 });
 
-$("#favoriteMoviesLink").click(function () {
+$(document).on("click", "#favoriteMoviesLink", function () {
     var favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
 
     if (favoriteMovies.length > 0) {
@@ -44,6 +44,8 @@ $("#favoriteMoviesLink").click(function () {
     } else {
         $("#result").html("<h3>No favorite movies found!</h3>");
     }
+
+    $(".sidenav").sidenav("close");
 });
 
 function getLocation() {
