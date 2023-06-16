@@ -274,6 +274,5 @@ var comedyMovies = [
     "The Mask",
     "Groundhog Day",
     "Hot Shots!",
-    "Meet the Fockers",
-    "Tropic Thunder"
+    "Meet the Fockers"
   ];
