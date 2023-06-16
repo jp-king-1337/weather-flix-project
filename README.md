@@ -35,7 +35,9 @@ To use the Weather Flix web app:
 
 ## Credits
 
+Outside of the GitHub Repo members part of this project, external resources such as the MaterializeCSS framework and the jQuery framework was used. We also took any bugs and problems we had to google and to ChatGPT to see if the problem could be resolved swiftly.
 
+A lot of the time ChatGPT would get us on the right track, but in itself would introduce a whole new set of problems, so it was all about finding the balance between debugging with AI and getting to the bottom of a problem the slow way!
 
 ## License
 MIT License
