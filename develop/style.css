@@ -44,6 +44,25 @@
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+#randomMovieBtn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#randomMovieBtn:hover::before {
+  opacity: 1;
 }
 
 .favourite-movies-list {
