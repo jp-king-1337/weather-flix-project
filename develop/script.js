@@ -17,10 +17,7 @@ $(document).ready(function () {
         window.location.href = "index.html"; // Replace "index.html" with the filename or URL of your main home screen
         window.location.reload(); // Refresh the browser window
     });
-});
 
-$(document).ready(function () {
-    // Initialize the modal
     $(".modal").modal();
 });
 
