@@ -19,6 +19,11 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    // Initialize the modal
+    $(".modal").modal();
+});
+
 $(document).on("click", "#favoritesBtn", function () {
     var movieTitle = $(this).siblings("h3").text();
     var favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
@@ -27,9 +32,13 @@ $(document).on("click", "#favoritesBtn", function () {
     if (!favoriteMovies.includes(movieTitle)) {
         favoriteMovies.push(movieTitle);
         localStorage.setItem("favoriteMovies", JSON.stringify(favoriteMovies));
-        alert("Movie added to favorites!");
+        $("#modalTitle").text("Success!");
+        $("#modalMessage").text("Movie added to favorites!");
+        $("#messageModal").modal("open");
     } else {
-        alert("This movie is already in your favorites!");
+        $("#modalTitle").text("Oops!");
+        $("#modalMessage").text("This movie is already in your favorites!");
+        $("#messageModal").modal("open");
     }
 });
 
