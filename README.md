@@ -30,7 +30,9 @@ To use the Weather Flix web app:
 
 5. Based on the weather conditions, the web app will generate a random movie suggestion for you to watch, within a genre tied to that weather condition.
 
-6. Enjoy your movie based on the weather in your area!
+6. When recommended a movie, you have the opportunity to add that film to a watch-list if you want to save it for another day.
+
+7. Enjoy your movie based on the weather in your area!
 
 
 ## Credits
