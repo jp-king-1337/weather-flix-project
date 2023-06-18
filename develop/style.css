@@ -120,6 +120,10 @@
     display: flex;
     justify-content: space-around;
   }
+  #home {
+    height: auto;
+    overflow-y: scroll;
+  }
 }
 
 /* ANIMATED WEATHER BACKGROUND */
