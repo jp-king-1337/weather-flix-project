@@ -1,7 +1,7 @@
 # weather-flix-project
 
 ## Description
-This app will generate a random movie for you to watch based on the weather in your area.
+Since weather often influences our moods, we have build a website that will suggests movies that relate to the current weather in your area!
 
 
 ## Table of Contents
