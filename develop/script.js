@@ -81,7 +81,7 @@ function getImageSource(weatherCode) {
 
     if (!imageSrc) {
         imageSrc = "./assets/weather-icons/cloudy-icon.png";
-        // toggleWeather("cloudy");
+        toggleWeather("cloudy");
     }
 
     return imageSrc;
@@ -118,22 +118,22 @@ function showPosition(position) {
                 toggleWeather("lightning");
             } else if (weatherCode >= 500 && weatherCode <= 599) {
                 $("#weather-image").attr("src", "develop/assets/weather-icons/rain-icon.png");
-                // toggleWeather("rain");
+                toggleWeather("rain");
             } else if (weatherCode === 800) {
                 $("#weather-image").attr("src", "develop/assets/weather-icons/sunny-icon.png");
-                // toggleWeather("sunny");
+                toggleWeather("sunny");
             } else if (weatherCode >= 600 && weatherCode <= 622) {
                 $("#weather-image").attr(
                     "src",
                     "develop/assets/weather-icons/snowing-icon.png"
                 );
-                // toggleWeather("snow");
+                toggleWeather("snow");
             } else {
                 $("#weather-image").attr(
                     "src",
                     "develop/assets/weather-icons/cloudy-icon.png"
                 );
-                // toggleWeather("cloudy");
+                toggleWeather("cloudy");
             }
 
             // Call the function to suggest movies based on the weather code
@@ -222,4 +222,3 @@ function resetBackground() {
     document.getElementById("snow").style.display = "none";
 }
 resetBackground();
-toggleWeather('lightning');
