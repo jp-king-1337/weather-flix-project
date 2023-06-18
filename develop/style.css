@@ -126,6 +126,16 @@
   }
 }
 
+@media (max-height: 780px) {
+  #home {
+    height: auto;
+    overflow-y: scroll;
+  }
+  #favoritesBtn {
+    margin-bottom: 20px;
+  }
+}
+
 /* ANIMATED WEATHER BACKGROUND */
 * {
   padding: 0;
