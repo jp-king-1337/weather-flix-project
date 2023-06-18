@@ -14,12 +14,12 @@
 }
 
 .container-fw {
-  background-color: #add8e6;
   width: 100%;
 }
 
 #weather-container {
-  border: 3px;
+  background: linear-gradient(rgba(0, 81, 255, 0.064),rgba(174, 202, 255, 0.315));
+  border-radius: 6px;
 }
 
 #weather-image {
@@ -27,7 +27,6 @@
 }
 
 .movie-section {
-  background-color: aquamarine;
   height: 93vh;
 }
 
@@ -68,13 +67,15 @@
 .favourite-movies-list {
   list-style-type: none;
   padding: 0;
+  background: rgba(139, 139, 139, 0.464);
+  border-radius: 6px;
 }
 
 .favourite-movie {
   margin-bottom: 10px;
   font-size: 18px;
   font-weight: bold;
-  color: #333;
+  color: #131313;
 }
 
 /* NAV LINK PADDING */
@@ -98,6 +99,8 @@
 
 #home {
   animation: fadeIn 1s ease-in;
+  height: 100vh;
+  overflow-y: hidden;
 }
 
 @media (min-width: 994px) {
@@ -111,4 +114,235 @@
     display: flex;
     justify-content: space-around;
   }
+}
+/* weather background */
+* {
+    padding: 0;
+    margin: 0;
+}
+.background {
+  background-color: #71a8f0;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: -100;
+}
+.activeWeather {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: 300% 300%;
+  z-index: 100;
+}
+#rain {
+    background-image: linear-gradient(30deg, rgb(30, 30, 43) 0%, rgb(70, 82, 88) 40%, rgb(65, 86, 99) 50%, rgb(71, 73, 98) 100%);
+    animation: cloudy 10s ease infinite;
+}
+#rain #particles1,#rain #particles2,#rain #particles3,#snow #particles1,#snow #particles2,#snow #particles3,#lightning #particles1,#lightning #particles2,#lightning #particles3 {
+    position:absolute;
+    top: 10px;
+    left: 10px;
+    opacity: 10%;
+    border-radius: 50%;
+}
+#rain #particles1,#rain #particles2,#rain #particles3,#lightning #particles1,#lightning #particles2,#lightning #particles3 {
+    width: 1px;
+    height: 10px;
+    background-color: white;
+    box-shadow:
+    100vw -90px lightblue,
+    90vw -180px lightblue,
+    80vw -90px lightblue,
+    70vw -180px lightblue,
+    60vw -190px lightblue,
+    10vw -280px lightblue,
+    20vw -290px lightblue,
+    30vw -380px lightblue,
+    40vw -290px lightblue,
+    10vw -380px lightblue,
+    5vw -390px lightblue,
+    50vw -400px lightblue;
+  }
+  #rain #particles1, #lightning #particles1,#lightning #particles3{
+    background-color: lightblue;
+    animation:particlesY 1s linear infinite;
+  }
+  #rain #particles2, #lightning #particles2 {
+    background-color: lightblue;
+    animation:particlesY2 1s linear infinite;
+  }
+  #rain #particles3 {
+    background-color: lightblue;
+    animation:particlesY3 1s linear infinite;
+  }
+
+/* snow background */
+#snow {
+  background-image: linear-gradient(10deg, rgb(88, 88, 88) 0%, rgb(147, 151, 153) 40%, rgb(90, 98, 103) 50%, rgb(195, 196, 210) 100%);
+  animation: cloudy 20s ease infinite;
+}
+#snow #particles1,#snow #particles2,#snow #particles3 {
+  width: 5px;
+  height: 5px;
+  background-color: white;
+  box-shadow:
+  100vw -90px white,
+  90vw -180px white,
+  80vw -90px white,
+  70vw -180px white,
+  60vw -190px white,
+  10vw -280px white,
+  20vw -290px white,
+  30vw -380px white,
+  40vw -290px white,
+  10vw -380px white,
+  5vw -390px white,
+  50vw -400px white;
+}
+#snow #particles1 {
+  background-color: white;
+  animation:particlesY 20s linear infinite,
+  snowParticlesX 5s ease-in-out infinite;
+}
+#snow #particles2 {
+  background-color: white;
+  animation:particlesY2 20s linear infinite,
+  snowParticlesX 5s ease-in-out infinite;
+}
+#snow #particles3 {
+  background-color: white;
+  animation:particlesY3 20s linear infinite,
+  snowParticlesX 5s ease-in-out infinite;
+}
+@keyframes lightning {
+  0% {
+      background-position: 100% 50%;
+    }
+  75% {
+      background-position: 50% 50%;
+    }
+  87% {
+      background-position: 100% 50%;
+    }
+  88% {
+      background-position: 0% 50%;
+    }
+  89% {
+      background-position: 100% 50%;
+    }
+  90% {
+      background-position: 50% 50%;
+    }
+  100% {
+      background-position: 100% 50%;
+    }
+  }
+@keyframes sunny {
+  0% {
+    background-position: 100% 50%;
+  }
+  25% {
+    background-position: 50% 25%;
+  }
+  50% {
+    background-position: 0% 50%;
+  }
+  75% {
+    background-position: 25% 75%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+@keyframes cloudy {
+  0% {
+    background-position: 100% 50%;
+  }
+  25% {
+    background-position: 50% 25%;
+  }
+  50% {
+    background-position: 0% 50%;
+  }
+  75% {
+    background-position: 50% 75%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+@keyframes particlesY {
+  0% {
+    transform: translate(0,-5vh);
+    opacity: 100%;
+  }
+  60% {
+    transform: translate(0,90vh);
+    opacity: 0%;
+  }
+  100% {
+    transform: translate(0,90vh);
+    opacity: 0%;
+  }
+}
+@keyframes particlesY2 {
+  0% {
+    transform: translate(0,-5vh);
+    opacity: 100%;
+  }
+  30% {
+    transform: translate(0,-5vh);
+    opacity: 100%;
+  }
+  100% {
+    transform: translate(0,90vh);
+    opacity: 0%;
+  }
+}
+@keyframes particlesY3 {
+  0% {
+    transform: translate(0,45vh);
+    opacity: 100%;
+  }
+  30% {
+    transform: translate(0,90vh);
+    opacity: 0%;
+  }
+  60% {
+    transform: translate(0,-5vh);
+    opacity: 0%;
+  }
+  100% {
+    transform: translate(0,45vh);
+    opacity: 100%;
+  }
+}
+@keyframes snowParticlesX {
+  0% {
+    rotate: 0deg;
+    top: 0px;
+  }
+  50% {
+    rotate: 3deg;
+    top: 10px;
+  }
+  100% {
+    rotate: 0deg;
+    top: 0px;
+  }
+}
+#lightning {
+  background-image: linear-gradient(-45deg, rgb(0, 0, 0) 0%, rgb(20, 21, 30) 25%, rgb(48, 47, 54) 50%, rgb(74, 74, 74) 100%);
+  animation: lightning 15s ease infinite;
+}
+#sunny {
+  background-image: linear-gradient( rgb(255, 254, 185) 0%, rgb(231, 248, 255) 25%, rgb(149, 210, 254) 50%, rgb(129, 138, 255) 100%);
+  animation: sunny 30s ease infinite;
+}
+#cloudy {
+  background-image: linear-gradient(30deg, rgb(30, 30, 43) 0%, rgb(70, 82, 88) 40%, rgb(108, 120, 128) 50%, rgb(71, 73, 98) 100%);
+  animation: cloudy 15s ease infinite;
 }
