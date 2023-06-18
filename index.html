@@ -13,9 +13,30 @@
     <link rel="stylesheet" href="./develop/style.css" />
 </head>
 
-<!-- BODY -->
+<!-- BACKGROUND ANIMATIONS -->
+<div class="background">
+    <div id="lightning" class="activeWeather">
+        <div id="particles1"></div>
+        <div id="particles2"></div>
+        <div id="particles3"></div>      
+    </div>
+    <div id="sunny" class="activeWeather"></div>
+    <div id="cloudy" class="activeWeather"></div>
+    <div id="rain" class="activeWeather">
+      <div id="particles1"></div>
+      <div id="particles2"></div>
+      <div id="particles3"></div>
+    </div>
+    <div id="snow" class="activeWeather">
+      <div id="particles1"></div>
+      <div id="particles2"></div>
+      <div id="particles3"></div>
+    </div>
+</div>
 
+<!-- BODY -->
 <body>
+
     <!-- WELCOME PAGE -->
     <div class="initial-container">
         <div class="row valign-wrapper" style="height: 90vh">
@@ -63,6 +84,7 @@
                                 <p id="temperature"></p>
                                 <p id="humidity"></p>
                             </div>
+                            
                         </div>
                     </div>
                 </div>

@@ -81,6 +81,7 @@ function getImageSource(weatherCode) {
 
     if (!imageSrc) {
         imageSrc = "./assets/weather-icons/cloudy-icon.png";
+        // toggleWeather("cloudy");
     }
 
     return imageSrc;
@@ -114,20 +115,25 @@ function showPosition(position) {
                     "src",
                     "develop/assets/weather-icons/lightning-icon.png"
                 );
+                toggleWeather("lightning");
             } else if (weatherCode >= 500 && weatherCode <= 599) {
                 $("#weather-image").attr("src", "develop/assets/weather-icons/rain-icon.png");
+                // toggleWeather("rain");
             } else if (weatherCode === 800) {
                 $("#weather-image").attr("src", "develop/assets/weather-icons/sunny-icon.png");
+                // toggleWeather("sunny");
             } else if (weatherCode >= 600 && weatherCode <= 622) {
                 $("#weather-image").attr(
                     "src",
                     "develop/assets/weather-icons/snowing-icon.png"
                 );
+                // toggleWeather("snow");
             } else {
                 $("#weather-image").attr(
                     "src",
                     "develop/assets/weather-icons/cloudy-icon.png"
                 );
+                // toggleWeather("cloudy");
             }
 
             // Call the function to suggest movies based on the weather code
@@ -202,3 +208,18 @@ function suggestMovies(weatherCode) {
             console.log("Error fetching movie data:", error);
         });
 }});
+
+function toggleWeather(weather) {
+    resetBackground();
+    var x = document.getElementById(weather);
+    x.style.display = "block";
+}
+function resetBackground() {
+    document.getElementById("lightning").style.display = "none";
+    document.getElementById("sunny").style.display = "none";
+    document.getElementById("cloudy").style.display = "none";
+    document.getElementById("rain").style.display = "none";
+    document.getElementById("snow").style.display = "none";
+}
+resetBackground();
+toggleWeather('lightning');
