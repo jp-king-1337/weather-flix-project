@@ -127,6 +127,7 @@
 @media (max-width: 600px) {
   .horizontal-display {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
   }
   #home {
