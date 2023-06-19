@@ -13,14 +13,9 @@ $(document).ready(function () {
     });
 
     $("#home-link").click(function (e) {
-        e.preventDefault(); 
-
-        // Hide the favorite movie content
-        $("#result").html; 
-
-        // Show the movie generate content
-        $(".initial-container").removeClass("display-none");
-        $("#home").addClass("display-none");
+        e.preventDefault(); // Prevent default link behavior
+        window.location.href = "index.html"; // Replace "index.html" with the filename or URL of your main home screen
+        window.location.reload(); // Refresh the browser window
     });
 
     $(document).on("click", "#favoritesBtn", function () {
