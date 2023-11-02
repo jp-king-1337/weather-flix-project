@@ -13,7 +13,10 @@ Since weather often influences our moods, we have build a website that will sugg
 
 
 ## Installation
-You can clone the repo from github by using this in your command line:
+You can clone the forked repo from github with:
+git clone git@github.com:jp-king-1337/weather-flix-project.git
+
+or you can clone the original with:
 git clone git@github.com:ThomasSzentirmay/weather-flix-project.git
 
 
@@ -22,7 +25,7 @@ To use the Weather Flix web app:
 
 1. Open your preferred web browser.
 
-2. Access the weather-flix-project web app by clicking on the following link: https://thomasszentirmay.github.io/weather-flix-project/
+2. Access the weather-flix-project web app by clicking on the following link: https://jp-king-1337.github.io/weather-flix-project/
 
 3. The web app will prompt you to allow location sharing. Select allow.
 
