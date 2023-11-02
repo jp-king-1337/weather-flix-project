@@ -27,7 +27,11 @@ To use the Weather Flix web app:
 
 1. Open your preferred web browser.
 
-2. Access the weather-flix-project web app by clicking on the following link: https://thomasszentirmay.github.io/weather-flix-project/
+2. Access the [forked Weather-Flix web app](https://jp-king-1337.github.io/weather-flix-project/) at the following link:
+https://jp-king-1337.github.io/weather-flix-project/
+
+or the [original Weather-Flix web app](https://thomasszentirmay.github.io/weather-flix-project/) at the following link:
+https://thomasszentirmay.github.io/weather-flix-project/
 
 3. The web app will prompt you to allow location sharing. Select allow.
 
