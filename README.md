@@ -14,9 +14,11 @@ Since weather often influences our moods, we have build a website that will sugg
 
 ## Installation
 You can clone the forked repo from github with:
+
 git clone git@github.com:jp-king-1337/weather-flix-project.git
 
 or you can clone the original with:
+
 git clone git@github.com:ThomasSzentirmay/weather-flix-project.git
 
 
