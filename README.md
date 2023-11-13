@@ -3,6 +3,8 @@
 ## Description
 Since weather often influences our moods, we have build a website that will suggests movies that relate to the current weather in your area!
 
+![Screenshot of the Weather Flix welcome page](images/weatherFlixProject_screenshot.png)
+
 
 ## Table of Contents
 
